@@ -1,0 +1,17 @@
+<!-- vote.html -->
+{% extends 'election/base.html' %}
+
+{% block content %}
+  <h2>Vote for a Candidate</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label for="candidate">Select a candidate:</label>
+    <select name="candidate" id="candidate">
+      {% for candidate in candidates %}
+        <option value="{{ candidate.id }}">{{ candidate.c_name }}</option>
+      {% endfor %}
+    </select>
+    <br><br>
+    <button type="submit">Vote</button>
+  </form>
+{% endblock %}

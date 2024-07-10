@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Election{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .user-info {
+            margin-right: 20px;
+            color: #fff;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>School Election</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'election:vote' %}">Vote</a></li>
+                <li><a href="{% url 'election:results' %}">Results</a></li>
+                {% if user.is_authenticated and user.is_superuser %}
+                <li><a href="{% url 'election:upload_csv' %}">Upload CSV</a></li>
+                <li><a href="{% url 'election:voters_list' %}">Voters List</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div class="user-info">
+            {% if user.is_authenticated %}
+                <span>Welcome, {{ user.username }}</span>
+            {% else %}
+                <a href="{% url 'election:login' %}" style="color: #fff;">Login</a>
+            {% endif %}
+        </div>
+    </header>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

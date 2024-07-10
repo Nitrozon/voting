@@ -1,0 +1,31 @@
+<!-- election/upload_csv.html -->
+{% extends 'election/base.html' %}
+
+{% block content %}
+<h2>Upload Candidates CSV</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="file" accept=".csv">
+    <button type="submit" name="upload_candidates_csv">Upload Candidates CSV</button>
+</form>
+
+<h2>Upload Voters CSV</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="file" accept=".csv">
+    <button type="submit" name="upload_voters_csv">Upload Voters CSV</button>
+</form>
+
+<h2>Upload Teachers CSV</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="file" accept=".csv">
+    <button type="submit" name="upload_teachers_csv">Upload Teachers CSV</button>
+</form>
+
+<h2>Reset All</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="reset_all">Reset All (Delete Candidates, Votes, and Non-Super Users)</button>
+</form>
+{% endblock %}
